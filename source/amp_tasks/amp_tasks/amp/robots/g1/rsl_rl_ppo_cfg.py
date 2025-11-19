@@ -61,7 +61,7 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
     )
     amp_data = AMPDataCfg(
         motion_files=[
-            "data/datasets/MocapG1Full/punch_000.npz"
+            "data/demo/punch_000.npz"
         ],
         body_names = [
             "pelvis",

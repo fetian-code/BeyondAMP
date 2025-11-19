@@ -31,7 +31,7 @@ class G1FlatEnvCfg(TrackingEnvCfg):
         ]
         # self.observations.policy.projected_gravity = None
         self.commands.motion.debug_vis = False
-        self.commands.motion.motion_file = "data/dataset/MocapG1Full/punch_000.npz"
+        self.commands.motion.motion_file = "data/demo/punch_000.npz"
 
 @configclass
 class G1FlatNoRelaEnvCfg(G1FlatEnvCfg):
