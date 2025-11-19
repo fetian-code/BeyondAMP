@@ -79,7 +79,7 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
             "right_elbow_link",
             "right_wrist_yaw_link",
         ],
-        amp_obs_cfg = AMPObsBaiscCfg()
+        amp_obs_terms = ["joint_pos", "joint_vel"]
     )
     amp_discr_hidden_dims = [256, 256]
     amp_reward_coef = 0.5

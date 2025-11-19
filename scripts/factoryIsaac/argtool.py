@@ -2,10 +2,7 @@ from __future__ import annotations
 
 import argparse
 from typing import TYPE_CHECKING, Tuple
-from rsl_rl.runners import OnPolicyRunner
 
-# Loading all the runners
-from rsl_rl.runners import *
 if TYPE_CHECKING:
     from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper
 
@@ -145,11 +142,10 @@ def load_cfgs(args_cli, modified=False):
     return task_name, env_cfg, agent_cfg, log_dir
 
 
-def prepare_wrapper(env, args_cli, agent_cfg) -> Tuple[RslRlVecEnvWrapper, type[OnPolicyRunner], dict]:
+def prepare_wrapper(env, args_cli, agent_cfg) -> Tuple[RslRlVecEnvWrapper, callable, dict]:
     print("Using main branch.")
-    from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper
-    func_runner = OnPolicyRunner
-    env = RslRlVecEnvWrapper(env)
+    from rsl_rl.env.isaaclab import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper, AMPEnvWrapper
+    env = AMPEnvWrapper(env)
     learn_cfg = {
         "num_learning_iterations": agent_cfg.max_iterations,
         "init_at_random_ep_len": True
@@ -159,6 +155,9 @@ def prepare_wrapper(env, args_cli, agent_cfg) -> Tuple[RslRlVecEnvWrapper, type[
         func_runner = agent_cfg.runner_type
         if not callable(func_runner):
             func_runner = eval(func_runner)
+    else:
+        from rsl_rl.runners import OnPolicyRunner
+        func_runner = OnPolicyRunner
 
     return env, func_runner, learn_cfg
 

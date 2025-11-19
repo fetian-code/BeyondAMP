@@ -13,12 +13,12 @@ class MotionDataset:
     def __init__(
         self, 
         motion_files: Sequence[str], body_indexes: Sequence[str], 
-        amp_obs_cfg: Union[AMPObsBaiscCfg|dict],
+        amp_obs_terms: List[str],
         device: str = "cpu",
         ):
         self.device = device
         self.body_indexes = torch.tensor(body_indexes, dtype=torch.long)
-        self.amp_obs_cfg = amp_obs_cfg
+        self.observation_terms = amp_obs_terms
 
         # Storage lists (later concatenated)
         joint_pos_list = []
@@ -71,10 +71,10 @@ class MotionDataset:
             robot.find_bodies(body_names, preserve_order=True)[0], dtype=torch.long, device=device
         )
         obj = cls(
-            motion_files = cfg["motion_files"],
-            body_indexes = body_indexes,
-            amp_obs_cfg  = cfg["amp_obs_cfg"],
-            device       = device
+            motion_files  = cfg["motion_files"],
+            body_indexes  = body_indexes,
+            amp_obs_terms = cfg["amp_obs_terms"],
+            device        = device
             )
         return obj
 
@@ -91,17 +91,15 @@ class MotionDataset:
             return shape_cast_table[name]
 
     def build_observation(self):
-        observation_terms = []
+        # observation_terms = []
         observation_dims = []
         
-        obs_dict  = self.amp_obs_cfg if isinstance(self.amp_obs_cfg, dict) else self.amp_obs_cfg()
-        for obs_term in obs_dict.keys():
-            observation_terms.append(obs_term)
+        for obs_term in self.observation_terms:
+            # observation_terms.append(obs_term)
             observation_dims.append(self.observation_dim_cast(obs_term))
-
         self.observation_dim = sum(observation_dims)
         self.observation_dims = observation_dims
-        self.observation_terms = observation_terms
+        # self.observation_terms = observation_terms
 
     # ----------------------- Transition index builder -----------------------
 

@@ -59,6 +59,7 @@ class AMPPPO:
                  device='cpu',
                  amp_replay_buffer_size=100000,
                  min_std=None,
+                 **kwargs
                  ):
 
         self.device = device

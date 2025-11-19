@@ -141,6 +141,14 @@ class RslRlVecEnvWrapper(VecEnv):
             obs_dict = self.unwrapped._get_observations()
         return obs_dict["policy"], {"observations": obs_dict}
 
+    def get_privileged_observations(self) -> tuple[torch.Tensor, None]:
+        """Returns the current observations of the environment."""
+        if hasattr(self.unwrapped, "observation_manager"):
+            obs_dict = self.unwrapped.observation_manager.compute()
+        else:
+            obs_dict = self.unwrapped._get_observations()
+        return obs_dict["critic"]
+
     @property
     def episode_length_buf(self) -> torch.Tensor:
         """The episode length buffer."""

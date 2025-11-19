@@ -48,7 +48,7 @@ from isaaclab_tasks.utils import get_checkpoint_path, parse_env_cfg
 from isaaclab.utils.dict import print_dict
 from isaaclab.utils.io import dump_yaml
 
-import fighterTask.train
+import amp_tasks
 
 def main():
     task_name, env_cfg, agent_cfg, log_dir = rsl_arg_cli.make_cfgs(args_cli, parse_env_cfg, None)

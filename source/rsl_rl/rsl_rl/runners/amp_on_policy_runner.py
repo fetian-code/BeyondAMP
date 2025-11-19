@@ -41,7 +41,7 @@ from rsl_rl.algorithms import AMPPPO, PPO
 from rsl_rl.modules import ActorCritic, ActorCriticRecurrent
 from rsl_rl.env import VecEnv
 from rsl_rl.algorithms.amp_discriminator import AMPDiscriminator
-from rsl_rl.datasets.motion_loader import AMPLoader
+# from rsl_rl.datasets.motion_loader import AMPLoader
 from rsl_rl.utils.utils import Normalizer
 
 from beyondAMP.motion.motion_loader import MotionDataset
@@ -54,7 +54,7 @@ class AMPOnPolicyRunner:
                  log_dir=None,
                  device='cpu'):
 
-        self.cfg=train_cfg["runner"]
+        self.cfg=train_cfg
         self.alg_cfg = train_cfg["algorithm"]
         self.policy_cfg = train_cfg["policy"]
         self.amp_data_cfg = train_cfg["amp_data"]
@@ -64,11 +64,8 @@ class AMPOnPolicyRunner:
             num_critic_obs = self.env.num_privileged_obs 
         else:
             num_critic_obs = self.env.num_obs
-        actor_critic_class = eval(self.cfg["policy_class_name"]) # ActorCritic
-        if self.env.include_history_steps is not None:
-            num_actor_obs = self.env.num_obs * self.env.include_history_steps
-        else:
-            num_actor_obs = self.env.num_obs
+        actor_critic_class = eval(self.policy_cfg["class_name"]) # ActorCritic
+        num_actor_obs = self.env.num_obs
         actor_critic: ActorCritic = actor_critic_class( num_actor_obs=num_actor_obs,
                                                         num_critic_obs=num_critic_obs,
                                                         num_actions=self.env.num_actions,
@@ -82,15 +79,15 @@ class AMPOnPolicyRunner:
         amp_normalizer = Normalizer(amp_data.observation_dim)
         discriminator = AMPDiscriminator(
             amp_data.observation_dim * 2,
-            train_cfg['runner']['amp_reward_coef'],
-            train_cfg['runner']['amp_discr_hidden_dims'], device,
-            train_cfg['runner']['amp_task_reward_lerp']).to(self.device)
+            train_cfg['amp_reward_coef'],
+            train_cfg['amp_discr_hidden_dims'], device,
+            train_cfg['amp_task_reward_lerp']).to(self.device)
 
         # self.discr: AMPDiscriminator = AMPDiscriminator()
-        alg_class = eval(self.cfg["algorithm_class_name"]) # PPO
+        alg_class = eval(self.alg_cfg["class_name"]) # PPO
         min_std = (
-            torch.tensor(self.cfg["min_normalized_std"], device=self.device) *
-            (torch.abs(self.env.dof_pos_limits[:, 1] - self.env.dof_pos_limits[:, 0])))
+            torch.tensor(self.cfg["amp_min_normalized_std"], device=self.device) *
+            (torch.abs(self.env.dof_pos_limits[0, :, 1] - self.env.dof_pos_limits[0, :, 0])))
         self.alg: AMPPPO = alg_class(actor_critic, discriminator, amp_data, amp_normalizer, device=self.device, min_std=min_std, **self.alg_cfg)
         self.num_steps_per_env = self.cfg["num_steps_per_env"]
         self.save_interval = self.cfg["save_interval"]

@@ -1,7 +1,6 @@
 from isaaclab.utils import configclass
 
 from robotlib.beyondMimic.robots.g1 import G1_ACTION_SCALE, G1_CYLINDER_CFG
-from .rsl_rl_ppo_cfg import LOW_FREQ_SCALE
 from ...amp_env_cfg import AMPEnvCfg
 
 
