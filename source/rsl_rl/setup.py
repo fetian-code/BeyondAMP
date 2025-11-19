@@ -1,5 +1,5 @@
 from setuptools import find_packages
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='rsl_rl',
       version='1.0.2',

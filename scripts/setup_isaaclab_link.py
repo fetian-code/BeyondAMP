@@ -31,12 +31,11 @@ def create_symlink(target: Path, link_dir: Path):
 
 
 modules = [
-    "./source/fighterLab",
-    "./source/fighterTask",
-    "./source/fsmLab",
     "./source/robotlib",
-    "./source/third_party/beyondMimic",
-    "./source/third_party/locomotion_rl_lab",
+    "./source/rsl_rl",
+    "./source/amp_tasks",
+    "./source/beyondMimic",
+    "./source/beyondAMP",
 ]
 
 def main():

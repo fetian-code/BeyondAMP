@@ -44,6 +44,8 @@ from rsl_rl.algorithms.amp_discriminator import AMPDiscriminator
 from rsl_rl.datasets.motion_loader import AMPLoader
 from rsl_rl.utils.utils import Normalizer
 
+from beyondAMP.motion.motion_loader import MotionDataset
+
 class AMPOnPolicyRunner:
 
     def __init__(self,
@@ -55,6 +57,7 @@ class AMPOnPolicyRunner:
         self.cfg=train_cfg["runner"]
         self.alg_cfg = train_cfg["algorithm"]
         self.policy_cfg = train_cfg["policy"]
+        self.amp_data_cfg = train_cfg["amp_data"]
         self.device = device
         self.env = env
         if self.env.num_privileged_obs is not None:
@@ -71,10 +74,10 @@ class AMPOnPolicyRunner:
                                                         num_actions=self.env.num_actions,
                                                         **self.policy_cfg).to(self.device)
 
-        amp_data = AMPLoader(
-            device, time_between_frames=self.env.dt, preload_transitions=True,
-            num_preload_transitions=train_cfg['runner']['amp_num_preload_transitions'],
-            motion_files=self.cfg["amp_motion_files"])
+        amp_data = MotionDataset.from_cfg(
+            cfg=self.amp_data_cfg,
+            device=device
+            )
         amp_normalizer = Normalizer(amp_data.observation_dim)
         discriminator = AMPDiscriminator(
             amp_data.observation_dim * 2,
@@ -87,7 +90,7 @@ class AMPOnPolicyRunner:
         min_std = (
             torch.tensor(self.cfg["min_normalized_std"], device=self.device) *
             (torch.abs(self.env.dof_pos_limits[:, 1] - self.env.dof_pos_limits[:, 0])))
-        self.alg: PPO = alg_class(actor_critic, discriminator, amp_data, amp_normalizer, device=self.device, min_std=min_std, **self.alg_cfg)
+        self.alg: AMPPPO = alg_class(actor_critic, discriminator, amp_data, amp_normalizer, device=self.device, min_std=min_std, **self.alg_cfg)
         self.num_steps_per_env = self.cfg["num_steps_per_env"]
         self.save_interval = self.cfg["save_interval"]
 

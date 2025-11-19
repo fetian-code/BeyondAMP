@@ -35,6 +35,7 @@ import torch.optim as optim
 from rsl_rl.modules import ActorCritic
 from rsl_rl.storage import RolloutStorage
 from rsl_rl.storage.replay_buffer import ReplayBuffer
+from beyondAMP.motion.motion_loader import MotionDataset
 
 class AMPPPO:
     actor_critic: ActorCritic
@@ -73,7 +74,7 @@ class AMPPPO:
         self.amp_transition = RolloutStorage.Transition()
         self.amp_storage = ReplayBuffer(
             discriminator.input_dim // 2, amp_replay_buffer_size, device)
-        self.amp_data = amp_data
+        self.amp_data:MotionDataset = amp_data
         self.amp_normalizer = amp_normalizer
 
         # PPO components

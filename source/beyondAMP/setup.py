@@ -3,14 +3,14 @@
 from setuptools import setup
 
 # Package metadata (hardcoded)
-PACKAGE_NAME = "deploylib"
+PACKAGE_NAME = "beyondAMP"
 VERSION = "0.1.0"
 AUTHOR = "zaterval"
 MAINTAINER = "Tsinghua University"
 MAINTAINER_EMAIL = "ziang_zheng@foxmail.com"
-DESCRIPTION = "deploy commands for trackerLab"
+DESCRIPTION = "beyondAMP"
 REPOSITORY = ""
-KEYWORDS = ["extension", "trackerLab", "deploy", "commands"]
+KEYWORDS = ["extension", "trackerLab"]
 
 # Minimum dependencies required prior to installation
 INSTALL_REQUIRES = [
