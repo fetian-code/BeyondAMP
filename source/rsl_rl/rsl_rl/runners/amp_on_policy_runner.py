@@ -269,7 +269,7 @@ class AMPOnPolicyRunner:
         self.alg.amp_normalizer = loaded_dict['amp_normalizer']
         if load_optimizer:
             self.alg.optimizer.load_state_dict(loaded_dict['optimizer_state_dict'])
-        self.current_learning_iteration = loaded_dict['iter']
+        # self.current_learning_iteration = loaded_dict['iter']
         return loaded_dict['infos']
 
     def get_inference_policy(self, device=None):

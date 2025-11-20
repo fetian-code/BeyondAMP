@@ -23,9 +23,9 @@ class AMPEnvWrapper(RslRlVecEnvWrapper):
             obs_dict = self.unwrapped._get_observations()
         return obs_dict["amp"]
     
-    def step(self, actions, *, not_amp=True):
+    def step(self, actions, *, not_amp=True, **kwargs):
         if not_amp:
-            return super().step(actions)
+            return super().step(actions, **kwargs)
         # clip actions
         if self.clip_actions is not None:
             actions = torch.clamp(actions, -self.clip_actions, self.clip_actions)
@@ -35,8 +35,8 @@ class AMPEnvWrapper(RslRlVecEnvWrapper):
         dones = (terminated | truncated).to(dtype=torch.long)
         # move extra observations to the extras dict
         obs = obs_dict["policy"]
-        privileged_obs = obs_dict["critic"]
-        terminal_amp_states = obs_dict["amp"]
+        privileged_obs = obs_dict.get("critic", obs)
+        terminal_amp_states = obs_dict.get("amp", obs)
         extras["observations"] = obs_dict
         reset_env_ids = torch.where(dones)[0]
         # extras["terminated"] = terminated

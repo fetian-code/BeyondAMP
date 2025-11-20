@@ -50,6 +50,8 @@ from isaaclab.utils.io import dump_yaml
 
 import amp_tasks
 
+from rsl_rl.runners.amp_on_policy_runner import AMPOnPolicyRunner
+
 def main():
     task_name, env_cfg, agent_cfg, log_dir = rsl_arg_cli.make_cfgs(args_cli, parse_env_cfg, None)
         
@@ -76,7 +78,7 @@ def main():
     agent_cfg.device = args_cli.rldevice
     
     env, func_runner, learn_cfg = rsl_arg_cli.prepare_wrapper(env, args_cli, agent_cfg)
-    runner = func_runner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
+    runner: AMPOnPolicyRunner = func_runner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
     
     # save resume path before creating a new log_dir
     if agent_cfg.resume:
@@ -88,7 +90,7 @@ def main():
         runner.load(resume_path)
 
     init_weight = getattr(agent_cfg, "init_weight", None)
-    if init_weight: runner.load_weight(init_weight)
+    if init_weight: runner.load(init_weight)
 
     # dump the configuration into log-directory
     dump_yaml(os.path.join(log_dir, "params", "env.yaml"), env_cfg)

@@ -176,7 +176,7 @@ class RslRlVecEnvWrapper(VecEnv):
         # return observations
         return obs_dict["policy"], {"observations": obs_dict}
 
-    def step(self, actions: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, dict]:
+    def step(self, actions: torch.Tensor, *, use_old=False, **kwargs) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, dict]:
         # clip actions
         if self.clip_actions is not None:
             actions = torch.clamp(actions, -self.clip_actions, self.clip_actions)
