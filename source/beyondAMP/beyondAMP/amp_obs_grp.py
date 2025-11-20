@@ -13,16 +13,20 @@ class AMPObsBaiscCfg(ObsGroup):
     joint_pos = ObsTerm(func=mdp.joint_pos_rel)
     joint_vel = ObsTerm(func=mdp.joint_vel_rel)
     
+AMPObsBaiscTerms = ["joint_pos", "joint_vel"]
+    
 @configclass
-class AMPObsSoftTrackingCfg(ObsGroup):
+class AMPObsSoftTrackCfg(ObsGroup):
     joint_pos = ObsTerm(func=mdp.joint_pos_rel)
     joint_vel = ObsTerm(func=mdp.joint_vel_rel)
     body_quat_w = ObsTerm(func=mdp.body_quat_w)
     body_lin_vel_w = ObsTerm(func=mdp.base_lin_vel)
     body_ang_vel_w = ObsTerm(func=mdp.base_ang_vel)
 
+AMPObsSoftTrackTerms = ["joint_pos", "joint_vel", "body_quat_w", "body_lin_vel_w", "body_ang_vel_w"]
+
 @configclass
-class AMPObsHardTrackingCfg(ObsGroup):
+class AMPObsHardTrackCfg(ObsGroup):
     joint_pos = ObsTerm(func=mdp.joint_pos_rel)
     joint_vel = ObsTerm(func=mdp.joint_vel_rel)
     body_pos_w = ObsTerm(func=mdp.body_pose_w)
@@ -30,3 +34,4 @@ class AMPObsHardTrackingCfg(ObsGroup):
     body_lin_vel_w = ObsTerm(func=mdp.base_lin_vel)
     body_ang_vel_w = ObsTerm(func=mdp.base_ang_vel)
     
+AMPObsHardTrackTerms = ["joint_pos", "joint_vel", "body_pos_w", "body_quat_w", "body_lin_vel_w", "body_ang_vel_w"]

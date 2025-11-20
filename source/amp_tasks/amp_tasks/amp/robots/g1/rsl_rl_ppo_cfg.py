@@ -3,6 +3,8 @@ from rsl_rl.utils.configs.rl_cfg import RslRlOnPolicyRunnerCfg, RslRlPpoActorCri
 
 from rsl_rl.utils.configs.amp_cfg import AMPDataCfg, AMPObsBaiscCfg, AMPPPOAlgorithmCfg, AMPRunnerCfg
 
+from beyondAMP.amp_obs_grp import AMPObsBaiscTerms, AMPObsSoftTrackTerms, AMPObsHardTrackTerms
+
 @configclass
 class G1FlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
     num_steps_per_env = 24
@@ -84,3 +86,26 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
     amp_discr_hidden_dims = [256, 256]
     amp_reward_coef = 0.5
     amp_task_reward_lerp = 0.3
+
+
+@configclass
+class G1FlatAMPBaiscCfg(G1FlatAMPRunnerCfg):
+    def __post_init__(self):
+        super().__post_init__()
+        self.amp_data.amp_obs_terms = AMPObsBaiscTerms
+        self.run_name = "basic"
+
+
+@configclass
+class G1FlatAMPSoftTrackCfg(G1FlatAMPRunnerCfg):
+    def __post_init__(self):
+        super().__post_init__()
+        self.amp_data.amp_obs_terms = AMPObsSoftTrackTerms
+        self.run_name = "soft_track"
+
+@configclass
+class G1FlatAMPHardTrackCfg(G1FlatAMPRunnerCfg):
+    def __post_init__(self):
+        super().__post_init__()
+        self.amp_data.amp_obs_terms = AMPObsHardTrackTerms
+        self.run_name = "hard_track"

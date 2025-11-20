@@ -26,12 +26,14 @@ python scripts/setup_vscode.py
 * PPO config for G1 robot: `source/amp_tasks/amp_tasks/amp/robots/g1/rsl_rl_ppo_cfg.py`
 
 Training can be launched with:
-```
-scripts/factoryIsaac/train.py --task AMPG1 --headless
+```bash
+scripts/factoryIsaac/train.py --task AMPG1_Basic --headless
+# scripts/factoryIsaac/train.py --task AMPG1_Soft --headless
+# scripts/factoryIsaac/train.py --task AMPG1_Hard --headless
 ```
 
 To evaluate or visualize a trained checkpoint:
-```
+```bash
 scripts/factoryIsaac/play.py --headless --target <path to your ckpt.pt> --video --num_envs 32
 ```
 

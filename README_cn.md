@@ -31,13 +31,15 @@ python scripts/setup_vscode.py
 
 训练可以通过以下命令启动：
 
-```
-scripts/factoryIsaac/train.py --task AMPG1 --headless
+```bash
+scripts/factoryIsaac/train.py --task AMPG1_Basic --headless
+# scripts/factoryIsaac/train.py --task AMPG1_Soft --headless
+# scripts/factoryIsaac/train.py --task AMPG1_Hard --headless
 ```
 
 要评估或可视化一个已训练的检查点 (checkpoint)：
 
-```
+```bash
 scripts/factoryIsaac/play.py --headless --target <path to your ckpt.pt> --video --num_envs 32
 ```
 
