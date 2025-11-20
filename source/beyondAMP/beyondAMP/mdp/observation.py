@@ -17,8 +17,23 @@ def body_quat_w(
 ) -> torch.Tensor:
     asset: Articulation = env.scene[asset_cfg.name]
     body_quat = asset.data.body_quat_w[:, asset_cfg.body_ids]
-    return body_quat
+    return body_quat.reshape(env.num_envs, -1)
     
+def body_lin_vel_w(
+    env:ManagerBasedRLEnv, 
+    asset_cfg:SceneEntityCfg=SceneEntityCfg("robot")
+) -> torch.Tensor:
+    asset: Articulation = env.scene[asset_cfg.name]
+    body_lin_vel_w = asset.data.body_lin_vel_w[:, asset_cfg.body_ids]
+    return body_lin_vel_w.reshape(env.num_envs, -1)
+
+def body_ang_vel_w(
+    env:ManagerBasedRLEnv, 
+    asset_cfg:SceneEntityCfg=SceneEntityCfg("robot")
+) -> torch.Tensor:
+    asset: Articulation = env.scene[asset_cfg.name]
+    body_ang_vel_w = asset.data.body_ang_vel_w[:, asset_cfg.body_ids]
+    return body_ang_vel_w.reshape(env.num_envs, -1)
 
 def amp_obs_body_displacement(env:ManagerBasedRLEnv, asset_cfg:SceneEntityCfg=SceneEntityCfg("robot")):
     return

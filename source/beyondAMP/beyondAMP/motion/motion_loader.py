@@ -12,7 +12,8 @@ class MotionDataset:
 
     def __init__(
         self, 
-        motion_files: Sequence[str], body_indexes: Sequence[str], 
+        motion_files: Sequence[str], 
+        body_indexes: Sequence[str], 
         amp_obs_terms: List[str],
         device: str = "cpu",
         ):
@@ -49,10 +50,20 @@ class MotionDataset:
         # Concatenate all trajectories into single big tensors
         self.joint_pos = torch.cat(joint_pos_list, dim=0).to(device)
         self.joint_vel = torch.cat(joint_vel_list, dim=0).to(device)
-        self.body_pos_w_all = torch.cat(body_pos_w_list, dim=0).to(device)
-        self.body_quat_w_all = torch.cat(body_quat_w_list, dim=0).to(device)
-        self.body_lin_vel_w_all = torch.cat(body_lin_vel_w_list, dim=0).to(device)
-        self.body_ang_vel_w_all = torch.cat(body_ang_vel_w_list, dim=0).to(device)
+        body_pos_w_all = torch.cat(body_pos_w_list, dim=0).to(device)
+        body_quat_w_all = torch.cat(body_quat_w_list, dim=0).to(device)
+        body_lin_vel_w_all = torch.cat(body_lin_vel_w_list, dim=0).to(device)
+        body_ang_vel_w_all = torch.cat(body_ang_vel_w_list, dim=0).to(device)
+
+        self.total_dataset_size = sum(traj_lengths)
+        
+        def subtract_flaten(target: torch.Tensor):
+            target = target[:, self.body_indexes]
+            return target.reshape(self.total_dataset_size, -1)
+        self.body_pos_w      = subtract_flaten(body_pos_w_all)
+        self.body_quat_w     = subtract_flaten(body_quat_w_all)
+        self.body_lin_vel_w  = subtract_flaten(body_lin_vel_w_all)
+        self.body_ang_vel_w  = subtract_flaten(body_ang_vel_w_all)
 
         # Keep per-trajectory FPS if needed
         self.fps_list = fps_list
@@ -87,7 +98,7 @@ class MotionDataset:
             assert isinstance(obs_term, torch.Tensor), f"invalid observation name: {name} for get dim"
             return obs_term.shape[-1]
         else:
-            return shape_cast_table[name]
+            raise NotImplementedError(f"Failed for term: {name}")
 
     def init_observation_dims(self):
         observation_dims = []
@@ -119,24 +130,6 @@ class MotionDataset:
         idx_t = torch.cat(idx_t).to(device)
         idx_tp1 = torch.cat(idx_tp1).to(device)
         return idx_t, idx_tp1
-
-    # ----------------------- Body selection -----------------------
-
-    @property
-    def body_pos_w(self) -> torch.Tensor:
-        return self.body_pos_w_all[:, self.body_indexes]
-
-    @property
-    def body_quat_w(self) -> torch.Tensor:
-        return self.body_quat_w_all[:, self.body_indexes]
-
-    @property
-    def body_lin_vel_w(self) -> torch.Tensor:
-        return self.body_lin_vel_w_all[:, self.body_indexes]
-
-    @property
-    def body_ang_vel_w(self) -> torch.Tensor:
-        return self.body_ang_vel_w_all[:, self.body_indexes]
 
     # ----------------------- Batch Sampling API -----------------------
 

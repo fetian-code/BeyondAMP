@@ -27,14 +27,14 @@ python scripts/setup_vscode.py
 
 Training can be launched with:
 ```bash
-scripts/factoryIsaac/train.py --task AMPG1_Basic --headless
-# scripts/factoryIsaac/train.py --task AMPG1_Soft --headless
-# scripts/factoryIsaac/train.py --task AMPG1_Hard --headless
+python scripts/factoryIsaac/train.py --task AMPG1_Basic --headless
+# python scripts/factoryIsaac/train.py --task AMPG1_Soft --headless
+# python scripts/factoryIsaac/train.py --task AMPG1_Hard --headless
 ```
 
 To evaluate or visualize a trained checkpoint:
 ```bash
-scripts/factoryIsaac/play.py --headless --target <path to your ckpt.pt> --video --num_envs 32
+python scripts/factoryIsaac/play.py --headless --target <path to your ckpt.pt> --video --num_envs 32
 ```
 
 |  AMP Baisc Style (3k)| Motion Tracking (30k) |

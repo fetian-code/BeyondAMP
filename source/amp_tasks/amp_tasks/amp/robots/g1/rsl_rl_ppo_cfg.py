@@ -5,6 +5,8 @@ from rsl_rl.utils.configs.amp_cfg import AMPDataCfg, AMPObsBaiscCfg, AMPPPOAlgor
 
 from beyondAMP.amp_obs_grp import AMPObsBaiscTerms, AMPObsSoftTrackTerms, AMPObsHardTrackTerms
 
+from .config import g1_key_body_names
+
 @configclass
 class G1FlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
     num_steps_per_env = 24
@@ -65,23 +67,8 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
         motion_files=[
             "data/demo/punch_000.npz"
         ],
-        body_names = [
-            "pelvis",
-            "left_hip_roll_link",
-            "left_knee_link",
-            "left_ankle_roll_link",
-            "right_hip_roll_link",
-            "right_knee_link",
-            "right_ankle_roll_link",
-            "torso_link",
-            "left_shoulder_roll_link",
-            "left_elbow_link",
-            "left_wrist_yaw_link",
-            "right_shoulder_roll_link",
-            "right_elbow_link",
-            "right_wrist_yaw_link",
-        ],
-        amp_obs_terms = ["joint_pos", "joint_vel"]
+        body_names = g1_key_body_names,
+        amp_obs_terms = None
     )
     amp_discr_hidden_dims = [256, 256]
     amp_reward_coef = 0.5
