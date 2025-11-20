@@ -35,7 +35,7 @@ import torch.optim as optim
 from rsl_rl.modules import ActorCritic
 from rsl_rl.storage import RolloutStorage
 from rsl_rl.storage.replay_buffer import ReplayBuffer
-from beyondAMP.motion.motion_loader import MotionDataset
+from beyondAMP.motion.motion_dataset import MotionDataset
 
 class AMPPPO:
     actor_critic: ActorCritic

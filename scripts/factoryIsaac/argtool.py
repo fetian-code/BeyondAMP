@@ -144,7 +144,7 @@ def load_cfgs(args_cli, modified=False):
 
 def prepare_wrapper(env, args_cli, agent_cfg) -> Tuple[RslRlVecEnvWrapper, callable, dict]:
     print("Using main branch.")
-    from rsl_rl.env.isaaclab import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper, AMPEnvWrapper
+    from beyondAMP.isaaclab import AMPEnvWrapper
     env = AMPEnvWrapper(env)
     learn_cfg = {
         "num_learning_iterations": agent_cfg.max_iterations,

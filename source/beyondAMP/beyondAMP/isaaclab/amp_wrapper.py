@@ -2,7 +2,7 @@ import torch
 from .vecenv_wrapper import RslRlVecEnvWrapper
 
 
-class WorldModelEnvWrapper(RslRlVecEnvWrapper):
+class AMPEnvWrapper(RslRlVecEnvWrapper):
     def __init__(self, env, clip_actions = None):
         super().__init__(env, clip_actions)
         self.rewards_shape = self.unwrapped.reward_manager._step_reward.shape[-1]
@@ -13,7 +13,41 @@ class WorldModelEnvWrapper(RslRlVecEnvWrapper):
             obs_dict = self.unwrapped.observation_manager.compute()
         else:
             obs_dict = self.unwrapped._get_observations()
-        return obs_dict["policy"], {"observations": obs_dict}
+        return obs_dict["policy"]
     
-    def get_amp_observations(self) -> torch.Tensor:
-        return
+    def get_amp_observations(self) -> tuple[torch.Tensor, dict]:
+        """Returns the current observations of the environment."""
+        if hasattr(self.unwrapped, "observation_manager"):
+            obs_dict = self.unwrapped.observation_manager.compute()
+        else:
+            obs_dict = self.unwrapped._get_observations()
+        return obs_dict["amp"]
+    
+    def step(self, actions, *, not_amp=True):
+        if not_amp:
+            return super().step(actions)
+        # clip actions
+        if self.clip_actions is not None:
+            actions = torch.clamp(actions, -self.clip_actions, self.clip_actions)
+        # record step information
+        obs_dict, rew, terminated, truncated, extras = self.env.step(actions)
+        # compute dones for compatibility with RSL-RL
+        dones = (terminated | truncated).to(dtype=torch.long)
+        # move extra observations to the extras dict
+        obs = obs_dict["policy"]
+        privileged_obs = obs_dict["critic"]
+        terminal_amp_states = obs_dict["amp"]
+        extras["observations"] = obs_dict
+        reset_env_ids = torch.where(dones)[0]
+        # extras["terminated"] = terminated
+        # move time out information to the extras dict
+        # this is only needed for infinite horizon tasks
+        if not self.unwrapped.cfg.is_finite_horizon:
+            extras["time_outs"] = truncated
+
+        # return the step information
+        return obs, privileged_obs, rew, dones, extras, reset_env_ids, terminal_amp_states[reset_env_ids]
+    
+    @property
+    def dof_pos_limits(self)->torch.Tensor:
+        return self.unwrapped.scene["robot"].data.joint_pos_limits

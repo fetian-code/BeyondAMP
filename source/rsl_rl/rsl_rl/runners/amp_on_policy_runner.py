@@ -42,9 +42,9 @@ from rsl_rl.modules import ActorCritic, ActorCriticRecurrent
 from rsl_rl.env import VecEnv
 from rsl_rl.algorithms.amp_discriminator import AMPDiscriminator
 from rsl_rl.utils.utils import Normalizer
-from rsl_rl.env.isaaclab.amp_wrapper import AMPEnvWrapper
+from beyondAMP.isaaclab.amp_wrapper import AMPEnvWrapper
 
-from beyondAMP.motion.motion_loader import MotionDataset
+from beyondAMP.motion.motion_dataset import MotionDataset
 
 class AMPOnPolicyRunner:
 
