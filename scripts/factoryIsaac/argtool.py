@@ -156,7 +156,7 @@ def prepare_wrapper(env, args_cli, agent_cfg) -> Tuple[RslRlVecEnvWrapper, calla
         if not callable(func_runner):
             func_runner = eval(func_runner)
     else:
-        from rsl_rl.runners import OnPolicyRunner
+        from rsl_rl_amp.runners import OnPolicyRunner
         func_runner = OnPolicyRunner
 
     return env, func_runner, learn_cfg

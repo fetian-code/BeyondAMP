@@ -61,7 +61,7 @@ from isaaclab_tasks.utils.parse_cfg import load_cfg_from_registry
 
 from isaaclab_rl.rsl_rl import export_policy_as_onnx, export_policy_as_jit
 
-from rsl_rl.runners import OnPolicyRunner
+from rsl_rl_amp.runners import OnPolicyRunner
 
 def main():
     """Play with RSL-RL agent. base branch"""

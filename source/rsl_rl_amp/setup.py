@@ -1,7 +1,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-setup(name='rsl_rl',
+setup(name='rsl_rl_amp',
       version='1.0.2',
       author='Nikita Rudin',
       author_email='rudinn@ethz.ch',

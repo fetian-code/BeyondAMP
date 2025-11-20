@@ -50,7 +50,7 @@ from isaaclab.utils.io import dump_yaml
 
 import amp_tasks
 
-from rsl_rl.runners.amp_on_policy_runner import AMPOnPolicyRunner
+from rsl_rl_amp.runners.amp_on_policy_runner import AMPOnPolicyRunner
 
 def main():
     task_name, env_cfg, agent_cfg, log_dir = rsl_arg_cli.make_cfgs(args_cli, parse_env_cfg, None)

@@ -32,9 +32,9 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from rsl_rl.modules import ActorCritic
-from rsl_rl.storage import RolloutStorage
-from rsl_rl.storage.replay_buffer import ReplayBuffer
+from rsl_rl_amp.modules import ActorCritic
+from rsl_rl_amp.storage import RolloutStorage
+from rsl_rl_amp.storage.replay_buffer import ReplayBuffer
 from beyondAMP.motion.motion_dataset import MotionDataset
 
 class AMPPPO:

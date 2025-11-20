@@ -62,7 +62,7 @@ import os
 import torch
 from datetime import datetime
 
-from rsl_rl.runners import OnPolicyRunner
+from rsl_rl_amp.runners import OnPolicyRunner
 
 from isaaclab.envs import (
     DirectMARLEnv,
@@ -158,10 +158,10 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
             args_cli.task_reward_weight if args_cli.task_reward_weight is not None else agent_cfg.task
         )
         
-        from amp_rsl_rl.runners import AMPOnPolicyRunner
+        from amp_rsl_rl_amp.runners import AMPOnPolicyRunner
         runner: OnPolicyRunner = AMPOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
     else:
-        from rsl_rl.runners import OnPolicyRunner
+        from rsl_rl_amp.runners import OnPolicyRunner
         runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
     # write git state to logs
     runner.add_git_repo_to_log(__file__)

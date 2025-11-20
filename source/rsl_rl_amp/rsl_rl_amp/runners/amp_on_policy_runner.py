@@ -37,11 +37,11 @@ import numpy as np
 from torch.utils.tensorboard import SummaryWriter
 import torch
 
-from rsl_rl.algorithms import AMPPPO, PPO
-from rsl_rl.modules import ActorCritic, ActorCriticRecurrent
-from rsl_rl.env import VecEnv
-from rsl_rl.algorithms.amp_discriminator import AMPDiscriminator
-from rsl_rl.utils.utils import Normalizer
+from rsl_rl_amp.algorithms import AMPPPO, PPO
+from rsl_rl_amp.modules import ActorCritic, ActorCriticRecurrent
+from rsl_rl_amp.env import VecEnv
+from rsl_rl_amp.algorithms.amp_discriminator import AMPDiscriminator
+from rsl_rl_amp.utils.utils import Normalizer
 from beyondAMP.isaaclab.amp_wrapper import AMPEnvWrapper
 
 from beyondAMP.motion.motion_dataset import MotionDataset

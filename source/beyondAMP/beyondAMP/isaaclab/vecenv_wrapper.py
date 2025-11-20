@@ -6,7 +6,7 @@
 import gymnasium as gym
 import torch
 
-from rsl_rl.env import VecEnv
+from rsl_rl_amp.env import VecEnv
 
 from isaaclab.envs import DirectRLEnv, ManagerBasedRLEnv
 

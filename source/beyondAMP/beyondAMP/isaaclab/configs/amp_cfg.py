@@ -1,9 +1,9 @@
 from typing import List
 from isaaclab.utils import configclass
-from rsl_rl.utils.configs.rl_cfg import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
+from .rl_cfg import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
 
 from beyondAMP.amp_obs_grp import AMPObsBaiscCfg
-from rsl_rl.runners.amp_on_policy_runner import AMPOnPolicyRunner
+from rsl_rl_amp.runners.amp_on_policy_runner import AMPOnPolicyRunner
 
 from dataclasses import MISSING
 

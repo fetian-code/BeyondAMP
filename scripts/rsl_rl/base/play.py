@@ -56,7 +56,7 @@ import time
 import torch
 
 import rsl_rl_utils
-from rsl_rl.runners import OnPolicyRunner
+from rsl_rl_amp.runners import OnPolicyRunner
 
 from isaaclab.devices import Se2Keyboard
 from isaaclab.envs import DirectMARLEnv, multi_agent_to_single_agent
@@ -150,10 +150,10 @@ def main():
     print(f"[INFO]: Loading model checkpoint from: {resume_path}")
     # load previously trained model
     if args_cli.amp:
-        from amp_rsl_rl.runners import AMPOnPolicyRunner
+        from amp_rsl_rl_amp.runners import AMPOnPolicyRunner
         ppo_runner: OnPolicyRunner = AMPOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     else:
-        from rsl_rl.runners import OnPolicyRunner
+        from rsl_rl_amp.runners import OnPolicyRunner
         ppo_runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     ppo_runner.load(resume_path)
 
