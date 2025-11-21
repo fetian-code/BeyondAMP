@@ -3,7 +3,7 @@ from .vecenv_wrapper import RslRlVecEnvWrapper
 
 
 class AMPEnvWrapper(RslRlVecEnvWrapper):
-    def __init__(self, env, clip_actions = None):
+    def __init__(self, env, clip_actions = None, *, motion_dataset=None):
         super().__init__(env, clip_actions)
         self.rewards_shape = self.unwrapped.reward_manager._step_reward.shape[-1]
     

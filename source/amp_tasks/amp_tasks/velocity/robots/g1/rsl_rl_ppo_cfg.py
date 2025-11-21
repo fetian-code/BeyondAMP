@@ -4,8 +4,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 from isaaclab.utils import configclass
-from beyondAMP.isaaclab.configs.rl_cfg import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
-from beyondAMP.isaaclab.configs.amp_cfg import AMPDataCfg, AMPObsBaiscCfg, AMPPPOAlgorithmCfg, AMPRunnerCfg
+from beyondAMP.isaaclab.rsl_rl.configs.rl_cfg import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
+from beyondAMP.isaaclab.rsl_rl.configs.amp_cfg import MotionDatasetCfg, AMPObsBaiscCfg, AMPPPOAlgorithmCfg, AMPRunnerCfg
 
 from .config import g1_key_body_names
 
@@ -70,7 +70,7 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
         desired_kl=0.01,
         max_grad_norm=1.0,
     )
-    amp_data = AMPDataCfg(
+    amp_data = MotionDatasetCfg(
         motion_files=[
             "data/datasets/MocapG1Full/LAFAN/walk1_subject1.npz",
             "data/datasets/MocapG1Full/LAFAN/walk1_subject2.npz",

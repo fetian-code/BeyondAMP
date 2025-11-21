@@ -1,8 +1,13 @@
+from __future__ import annotations
+
 import os
 import numpy as np
 import torch
 from typing import Sequence, List, Union
 from beyondAMP.amp_obs_grp import AMPObsBaiscCfg
+
+from isaaclab.utils import configclass
+from dataclasses import MISSING
 
 class MotionDataset:
     """
@@ -167,3 +172,11 @@ class MotionDataset:
                 t1.append(_t1); tp1.append(_tp1)
             t1, tp1 = torch.cat(t1, dim=-1), torch.cat(tp1, dim=-1)
             yield t1, tp1
+            
+            
+@configclass
+class MotionDatasetCfg:
+    asset_name: str = "robot"
+    motion_files: List[str] = MISSING
+    body_names: List[str] = MISSING
+    amp_obs_terms:  List[str] = ["joint_pos", "joint_vel"]

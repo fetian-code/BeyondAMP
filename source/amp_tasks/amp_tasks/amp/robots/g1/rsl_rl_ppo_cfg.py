@@ -1,7 +1,7 @@
 from isaaclab.utils import configclass
-from beyondAMP.isaaclab.configs.rl_cfg import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
+from beyondAMP.isaaclab.rsl_rl.configs.rl_cfg import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
 
-from beyondAMP.isaaclab.configs.amp_cfg import AMPDataCfg, AMPObsBaiscCfg, AMPPPOAlgorithmCfg, AMPRunnerCfg
+from beyondAMP.isaaclab.rsl_rl.configs.amp_cfg import MotionDatasetCfg, AMPObsBaiscCfg, AMPPPOAlgorithmCfg, AMPRunnerCfg
 
 from beyondAMP.amp_obs_grp import AMPObsBaiscTerms, AMPObsSoftTrackTerms, AMPObsHardTrackTerms
 
@@ -63,7 +63,7 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
         desired_kl=0.01,
         max_grad_norm=1.0,
     )
-    amp_data = AMPDataCfg(
+    amp_data = MotionDatasetCfg(
         motion_files=[
             "data/demo/punch_000.npz"
         ],
@@ -81,6 +81,8 @@ class G1FlatAMPBaiscCfg(G1FlatAMPRunnerCfg):
         super().__post_init__()
         self.amp_data.amp_obs_terms = AMPObsBaiscTerms
         self.run_name = "basic"
+        self.amp_task_reward_lerp = 0.05
+        self.amp_reward_coef = 1.0
 
 
 @configclass
