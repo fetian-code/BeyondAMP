@@ -73,17 +73,6 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
     amp_data = MotionDatasetCfg(
         motion_files=[
             "data/datasets/MocapG1Full/LAFAN/walk1_subject1.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk1_subject2.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk1_subject5.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk2_subject1.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk2_subject3.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk2_subject4.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk3_subject1.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk3_subject2.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk3_subject3.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk3_subject4.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk3_subject5.npz",
-            "data/datasets/MocapG1Full/LAFAN/walk4_subject1.npz",
         ],
         body_names = g1_key_body_names,
         amp_obs_terms = AMPObsBaiscTerms
