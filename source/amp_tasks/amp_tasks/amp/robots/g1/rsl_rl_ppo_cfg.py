@@ -92,9 +92,7 @@ class G1FlatAMPSoftTrackCfg(G1FlatAMPRunnerCfg):
         super().__post_init__()
         self.amp_data.amp_obs_terms = AMPObsSoftTrackTerms
         self.run_name = "soft_track"
-        self.amp_data.motion_files = [
-            "data/datasets/MocapG1Full/LAFAN/walk1_subject1.npz",
-        ]
+        self.amp_data.motion_files = []
 
 @configclass
 class G1FlatAMPHardTrackCfg(G1FlatAMPRunnerCfg):
@@ -102,6 +100,4 @@ class G1FlatAMPHardTrackCfg(G1FlatAMPRunnerCfg):
         super().__post_init__()
         self.amp_data.amp_obs_terms = AMPObsHardTrackTerms
         self.run_name = "hard_track"
-        self.amp_data.motion_files = [
-            "data/datasets/MocapG1Full/LAFAN/walk1_subject1.npz"
-        ]
+        self.amp_data.motion_files = []

@@ -8,6 +8,8 @@ from beyondAMP.obs_groups import AMPObsBaiscTerms, AMPObsSoftTrackTerms, AMPObsH
 
 from robotlib.robot_keys.g1_29d import g1_key_body_names, g1_anchor_name
 
+from amp_tasks.amp_task_demo_data_cfg import soccer_shoot_file
+
 @configclass
 class G1FlatEnvCfg(TrackingEnvCfg):
     def __post_init__(self):
@@ -34,7 +36,7 @@ class G1FlatEnvCfg(TrackingEnvCfg):
         ]
         # self.observations.policy.projected_gravity = None
         self.commands.motion.debug_vis = False
-        self.commands.motion.motion_file = "data/datasets/MocapG1Full/LAFAN/walk1_subject1.npz"
+        self.commands.motion.motion_file = soccer_shoot_file
         
         self.observations.policy.motion_anchor_pos_b = None
         self.observations.policy.motion_anchor_ori_b = None # using gravity instead

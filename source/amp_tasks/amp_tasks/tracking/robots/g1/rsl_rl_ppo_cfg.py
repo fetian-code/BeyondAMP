@@ -38,6 +38,7 @@ class G1FlatWoStateEstimationPPORunnerCfg(G1FlatPPORunnerCfg):
 
 from robotlib.robot_keys.g1_29d import g1_key_body_names, g1_anchor_name
 from beyondAMP.obs_groups import AMPObsBaiscTerms, AMPObsSoftTrackTerms, AMPObsHardTrackTerms
+from amp_tasks import amp_task_demo_data_cfg
 
 @configclass
 class G1FlatAMPRunnerCfg(AMPRunnerCfg):
@@ -82,6 +83,4 @@ class G1FlatAMPHardTrackCfg(G1FlatAMPRunnerCfg):
         super().__post_init__()
         self.amp_data.amp_obs_terms = AMPObsHardTrackTerms
         self.run_name = "hard_track"
-        self.amp_data.motion_files = [
-            "data/datasets/MocapG1Full/LAFAN/walk1_subject1.npz"
-        ]
+        self.amp_data.motion_files = [amp_task_demo_data_cfg]

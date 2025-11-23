@@ -1,8 +1,3 @@
-# Copyright (c) 2022-2025, The Isaac Lab Project Developers.
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
 from isaaclab.utils import configclass
 from beyondAMP.isaaclab.rsl_rl.configs.rl_cfg import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
 from beyondAMP.isaaclab.rsl_rl.configs.amp_cfg import MotionDatasetCfg, AMPObsBaiscCfg, AMPPPOAlgorithmCfg, AMPRunnerCfg
@@ -10,6 +5,8 @@ from beyondAMP.isaaclab.rsl_rl.configs.amp_cfg import MotionDatasetCfg, AMPObsBa
 from robotlib.robot_keys.g1_29d import g1_key_body_names, g1_anchor_name
 
 from beyondAMP.obs_groups import AMPObsBaiscTerms
+
+from amp_tasks.amp_task_demo_data_cfg import velocity_task_files
 
 @configclass
 class BasePPORunnerCfg(RslRlOnPolicyRunnerCfg):
@@ -71,9 +68,7 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
         max_grad_norm=1.0,
     )
     amp_data = MotionDatasetCfg(
-        motion_files=[
-            "data/datasets/MocapG1Full/LAFAN/walk1_subject1.npz",
-        ],
+        motion_files=velocity_task_files,
         body_names = g1_key_body_names,
         amp_obs_terms = AMPObsBaiscTerms,
         anchor_name=g1_anchor_name
