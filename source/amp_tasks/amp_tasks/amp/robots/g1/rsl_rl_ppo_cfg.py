@@ -12,7 +12,7 @@ class G1FlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
     num_steps_per_env = 24
     max_iterations = 30000
     save_interval = 500
-    experiment_name = "g1_flat"
+    experiment_name = "g1_flat_demo"
     empirical_normalization = True
     policy = RslRlPpoActorCriticCfg(
         init_noise_std=1.0,
@@ -40,7 +40,7 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
     num_steps_per_env = 24
     max_iterations = 10000
     save_interval = 500
-    experiment_name = "g1_flat"
+    experiment_name = "g1_flat_demo"
     empirical_normalization = True
     policy = RslRlPpoActorCriticCfg(
         init_noise_std=1.0,
