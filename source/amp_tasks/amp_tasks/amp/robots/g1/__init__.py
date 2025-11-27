@@ -7,7 +7,7 @@ from . import rsl_rl_ppo_cfg, flat_env_cfg
 ##
 
 gym.register(
-    id="PPOG1",
+    id="beyondAMP-DemoPunch-G1-Base",
     entry_point="isaaclab.envs:ManagerBasedRLEnv",
     disable_env_checker=True,
     kwargs={
@@ -17,7 +17,7 @@ gym.register(
 )
 
 gym.register(
-    id="AMPG1_Basic",
+    id="beyondAMP-DemoPunch-G1-BasicAMP",
     entry_point="isaaclab.envs:ManagerBasedRLEnv",
     disable_env_checker=True,
     kwargs={
@@ -28,7 +28,7 @@ gym.register(
 
 
 gym.register(
-    id="AMPG1_Soft",
+    id="beyondAMP-DemoPunch-G1-SoftAMPTrack",
     entry_point="isaaclab.envs:ManagerBasedRLEnv",
     disable_env_checker=True,
     kwargs={
@@ -38,7 +38,7 @@ gym.register(
 )
 
 gym.register(
-    id="AMPG1_Hard",
+    id="beyondAMP-DemoPunch-G1-HardAMPTrack",
     entry_point="isaaclab.envs:ManagerBasedRLEnv",
     disable_env_checker=True,
     kwargs={

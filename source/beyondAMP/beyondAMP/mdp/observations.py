@@ -67,7 +67,7 @@ def base_lin_vel_yaw(
     # Get yaw-only quaternion (ignores pitch/roll)
     yaw_quat = math_utils.yaw_quat(asset.data.root_quat_w)
     # Transform to yaw-only frame
-    root_lin_vel_yaw = math_utils.quat_rotate_inverse(yaw_quat, root_lin_vel_w)
+    root_lin_vel_yaw = math_utils.quat_apply_inverse(yaw_quat, root_lin_vel_w)
     return root_lin_vel_yaw
 
 
@@ -89,5 +89,5 @@ def base_ang_vel_yaw(
     # Get yaw-only quaternion (ignores pitch/roll)
     yaw_quat = math_utils.yaw_quat(asset.data.root_quat_w)
     # Transform to yaw-only frame
-    root_ang_vel_yaw = math_utils.quat_rotate_inverse(yaw_quat, root_ang_vel_w)
+    root_ang_vel_yaw = math_utils.quat_apply_inverse(yaw_quat, root_ang_vel_w)
     return root_ang_vel_yaw

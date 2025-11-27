@@ -47,7 +47,7 @@ def track_lin_vel_xy_exp_torso(
     yaw_quat = math_utils.yaw_quat(root_quat_w)
     
     # Transform world velocity to yaw-only frame
-    body_lin_vel_yaw = math_utils.quat_rotate_inverse(yaw_quat, body_lin_vel_w)
+    body_lin_vel_yaw = math_utils.quat_apply_inverse(yaw_quat, body_lin_vel_w)
     
     # Extract XY components (in horizontal plane)
     body_vel_xy = body_lin_vel_yaw[:, :2]
@@ -141,7 +141,7 @@ def pelvis_upright(
         gravity_w = torch.tensor([0.0, 0.0, -1.0], device=env.device).unsqueeze(0).expand(env.num_envs, -1)
     
     # Transform gravity to pelvis body frame
-    gravity_b = math_utils.quat_rotate_inverse(pelvis_quat_w, gravity_w)
+    gravity_b = math_utils.quat_apply_inverse(pelvis_quat_w, gravity_w)
     
     # Reward is based on how close gravity aligns with -z axis in body frame
     # When upright, gravity should point in -z direction: [0, 0, -1]
@@ -191,7 +191,7 @@ def pelvis_forward_lean(
     else:
         gravity_w = torch.tensor([0.0, 0.0, -1.0], device=env.device).unsqueeze(0).expand(env.num_envs, -1)
     
-    gravity_b = math_utils.quat_rotate_inverse(pelvis_quat_w, gravity_w)
+    gravity_b = math_utils.quat_apply_inverse(pelvis_quat_w, gravity_w)
     
     # When leaning forward 90 degrees, gravity should point in +x direction: [1, 0, 0]
     # Reward based on x alignment (should be 1) and penalize y, z deviation
