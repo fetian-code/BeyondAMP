@@ -7,7 +7,8 @@ class G1FlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
     num_steps_per_env = 24
     max_iterations = 30000
     save_interval = 500
-    experiment_name = "g1_flat"
+    experiment_name = "g1_track"
+    run_name = "origin"
     empirical_normalization = True
     policy = RslRlPpoActorCriticCfg(
         init_noise_std=1.0,
@@ -32,7 +33,7 @@ class G1FlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
 
 @configclass
 class G1FlatWoStateEstimationPPORunnerCfg(G1FlatPPORunnerCfg):
-    run_name = "wo"
+    run_name = "origin_wo"
     def __post_init__(self):
         super().__post_init__()
 
@@ -45,7 +46,7 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
     num_steps_per_env = 24
     max_iterations = 10000
     save_interval = 500
-    experiment_name = "g1_flat"
+    experiment_name = "g1_track"
     empirical_normalization = True
     policy = RslRlPpoActorCriticCfg(
         init_noise_std=1.0,
@@ -76,11 +77,11 @@ class G1FlatAMPRunnerCfg(AMPRunnerCfg):
     )
     amp_discr_hidden_dims = [256, 256]
     amp_reward_coef = 0.5
-    amp_task_reward_lerp = 0.3
+    amp_task_reward_lerp = 0.7
 
 class G1FlatAMPHardTrackCfg(G1FlatAMPRunnerCfg):
     def __post_init__(self):
         super().__post_init__()
         self.amp_data.amp_obs_terms = AMPObsHardTrackTerms
-        self.run_name = "hard_track"
-        self.amp_data.motion_files = [amp_task_demo_data_cfg]
+        self.run_name = "amp_hard"
+        self.amp_data.motion_files = [amp_task_demo_data_cfg.soccer_shoot_file]
