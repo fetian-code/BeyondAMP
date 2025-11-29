@@ -40,7 +40,7 @@ import torch
 from rsl_rl_amp.algorithms import AMPPPO, PPO
 from rsl_rl_amp.modules import ActorCritic, ActorCriticRecurrent
 from rsl_rl_amp.env import VecEnv
-from rsl_rl_amp.algorithms.amp_discriminator import AMPDiscriminator
+from rsl_rl_amp.modules.amp_discriminator import AMPDiscriminator
 from rsl_rl_amp.utils.utils import Normalizer
 from beyondAMP.isaaclab.rsl_rl.amp_wrapper import AMPEnvWrapper
 
