@@ -1,12 +1,15 @@
 from sim2simlib.mimic.config import Sim2SimMimic_Config, MimicObservations_Config, MimicDataset_Config
 from sim2simlib.mimic.sim2sim_mimic import Sim2SimMimic
-from sim2simlib import MUJOCO_ASSETS, CHECKPOINT_DIR
+from sim2simlib import MUJOCO_ASSETS
 from sim2simlib.model.config import Sim2Sim_Config, Observations_Config, Actions_Config, Motor_Config
 from sim2simlib.model.actuator_motor import DCMotor, PIDMotor
 import numpy as np
 
-dataset_dirs=["/home/ac/Desktop/2025/Multi-Motion-Tracking/whole_body_tracking/datasets/npz_datasets/LAFAN1_Retargeting_Dataset"]
+dataset_dirs=[
+    "data/datasets"
+]
 
+CHECKPOINT_DIR = ""
 
 config = Sim2SimMimic_Config(
     robot_name='g1',

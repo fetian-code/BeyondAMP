@@ -1,14 +1,3 @@
-"""
-Sim2Sim Motion Tracking/Mimic for MuJoCo
-
-This module implements motion tracking functionality using MuJoCo to verify
-motion data from datasets. It loads motion sequences and replays them in
-MuJoCo simulation with PD control.
-
-Author: Lu Zuxing
-Date: 2025/11/13
-"""
-
 import re
 import time
 from pathlib import Path

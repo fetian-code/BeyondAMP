@@ -1,11 +1,3 @@
-"""
-Sim2Sim runner
-
-
-
-Author: Lu Zuxing
-Data: 2025/8/22
-"""
 from abc import ABC, abstractmethod
 import time
 import re

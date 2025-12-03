@@ -1,13 +1,3 @@
-"""
-Sim2Sim Mimic Configuration System
-
-Simplified configuration specifically designed for motion tracking/mimic tasks.
-Focuses on motion playback, dataset loading, and PD control parameters.
-
-Author: Lu Zuxing
-Date: 2025/11/13
-"""
-
 from dataclasses import dataclass, field
 from typing import Optional
 import numpy as np

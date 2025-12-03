@@ -1,12 +1,3 @@
-"""
-Motor actuator models for robotic simulation.
-
-This module provides PID and DC motor models with different torque limitation strategies.
-The models implement position and velocity control with configurable parameters.
-
-Author: Lu Zuxing
-Data: 2025/8/22
-"""
 import rich
 import re
 import numpy as np

@@ -1,15 +1,3 @@
-"""
-sim2simlib config system
-follow the isaaclab manager system,
-support:
-1. Observations Terms order define,
-2. Observations Terms history,
-3. Motor Joint name Regular expression,
-
-Author: Lu Zuxing
-Data: 2025/8/22
-"""
-
 from dataclasses import dataclass
 import numpy as np
 
