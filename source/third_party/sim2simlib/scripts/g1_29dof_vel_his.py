@@ -1,11 +1,11 @@
 import numpy as np
-from sim2simlib.model.config import Sim2Sim_Config, Observations_Config, Actions_Config, Motor_Config
+from sim2simlib.model.config import Sim2SimCfg, ObservationsCfg, ActionsCfg, MotorCfg
 from sim2simlib.model.sim2sim_base import Sim2SimBaseModel
 from sim2simlib.model.actuator_motor import DCMotor, PIDMotor
 from sim2simlib import MUJOCO_ASSETS, CHECKPOINT_DIR
 
 
-config = Sim2Sim_Config(
+config = Sim2SimCfg(
     robot_name='g1_29dof_vel_his',
     simulation_dt=0.002,
     slowdown_factor=1.0,
@@ -41,7 +41,7 @@ config = Sim2Sim_Config(
                         'right_wrist_pitch_joint', 
                         'left_wrist_yaw_joint', 
                         'right_wrist_yaw_joint'],
-    observation_cfg=Observations_Config(
+    observation_cfg=ObservationsCfg(
         base_observations_terms=['base_ang_vel', 
                                  'gravity_orientation', 
                                  'cmd', 
@@ -60,11 +60,11 @@ config = Sim2Sim_Config(
             },
         ),
     cmd=[1,0,0],
-    action_cfg=Actions_Config(
+    action_cfg=ActionsCfg(
         action_clip=(-100.0, 100.0),
         scale=0.25
     ),
-    motor_cfg=Motor_Config(
+    motor_cfg=MotorCfg(
         motor_type=PIDMotor,
                 effort_limit={
             # "legs"

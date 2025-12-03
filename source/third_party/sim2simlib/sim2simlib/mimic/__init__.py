@@ -8,8 +8,8 @@ Date: 2025/11/13
 """
 
 from .config import (
-    MimicDataset_Config,
-    Sim2SimMimic_Config,
+    BeyondMimicDatasetCfg,
+    Sim2SimBeyondMimicCfg,
 )
-from .sim2sim_mimic import Sim2SimMimic
+from .sim2sim_beyond_mimic import Sim2SimBeyondMimic
 

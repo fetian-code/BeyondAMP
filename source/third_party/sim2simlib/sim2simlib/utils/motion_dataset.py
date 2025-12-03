@@ -14,7 +14,7 @@ import yaml
 from torch.utils.data import Dataset
 
 
-class Motion_Dataset(Dataset):
+class MotionDataset(Dataset):
     """PyTorch Dataset for loading motion data from NPZ files.
     
     This dataset loads motion data lazily (on-demand in __getitem__) to avoid
@@ -346,7 +346,7 @@ Note: Use '+' to separate multiple splits for a single dataset (e.g., train+walk
         parser.error(f"Number of splits ({len(parsed_splits)}) must match number of dataset_dirs ({len(args.dataset_dirs)})")
     
     # Create dataset
-    dataset = Motion_Dataset(
+    dataset = MotionDataset(
         dataset_dirs=args.dataset_dirs,
         robot_name=args.robot_name,
         splits=parsed_splits,

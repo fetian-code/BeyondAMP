@@ -9,12 +9,12 @@ class Actions():
     joint_efforts: np.ndarray
 
 @dataclass
-class Actions_Config:
+class ActionsCfg:
     scale: float | dict[str, float]
     action_clip: tuple[float, float]
 
 @dataclass
-class Observations_Config:
+class ObservationsCfg:
     base_observations_terms: list[str]
     scale: dict[str, float]
     using_base_obs_history: bool
@@ -27,7 +27,7 @@ class Observations_Config:
     
 
 @dataclass
-class Motor_Config(): 
+class MotorCfg(): 
     motor_type: type = None
     """Motor type: PIDMotor or DCMotor"""
     joint_names: list[str] = None
@@ -48,7 +48,7 @@ class Motor_Config():
     """not use"""
 
 @dataclass
-class Sim2Sim_Config:
+class Sim2SimCfg:
     
     robot_name: str
     """robot name for exp"""
@@ -71,11 +71,11 @@ class Sim2Sim_Config:
     default_angles: np.ndarray | dict[str, float]
     """Issaclab scene/robot/init_state/joint_pos"""
     
-    observation_cfg: Observations_Config
+    observation_cfg: ObservationsCfg
     """observation config for obs order and scale"""
-    action_cfg: Actions_Config
+    action_cfg: ActionsCfg
     """action config for clip and scale"""
-    motor_cfg: Motor_Config
+    motor_cfg: MotorCfg
     """actuators config"""
     
     debug: bool

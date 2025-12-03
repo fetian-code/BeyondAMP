@@ -2,11 +2,11 @@ from dataclasses import dataclass, field
 from typing import Optional
 import numpy as np
 
-from sim2simlib.model.config import Sim2Sim_Config, Observations_Config, Actions_Config
+from sim2simlib.model.config import Sim2SimCfg, ObservationsCfg, ActionsCfg
 
 
 @dataclass
-class MimicDataset_Config:
+class BeyondMimicDatasetCfg:
     """Dataset configuration for motion loading.
     
     Specifies which datasets and splits to load for motion tracking.
@@ -32,15 +32,15 @@ class MimicDataset_Config:
 
 
 @dataclass
-class MimicObservations_Config(Observations_Config):
+class BeyondMimicObservationsCfg(ObservationsCfg):
     motion_observations_terms: list[str]
     
 @dataclass
-class Sim2SimMimic_Config(Sim2Sim_Config):
+class Sim2SimBeyondMimicCfg(Sim2SimCfg):
     """Configuration for Sim2Sim Mimic model.
     """
     
-    mimic_dataset_cfg: MimicDataset_Config
-    observation_cfg: MimicObservations_Config
+    mimic_dataset_cfg: BeyondMimicDatasetCfg
+    observation_cfg: BeyondMimicObservationsCfg
     policy_body_names: Optional[list[str]]
     

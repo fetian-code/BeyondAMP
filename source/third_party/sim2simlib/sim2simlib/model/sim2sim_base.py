@@ -10,7 +10,7 @@ import mujoco
 import mujoco.viewer
 
 from sim2simlib.utils.utils import get_gravity_orientation
-from sim2simlib.model.config import Sim2Sim_Config, Actions
+from sim2simlib.model.config import Sim2SimCfg, Actions
 
 
 class Sim2Sim(ABC):
@@ -25,9 +25,9 @@ class Sim2Sim(ABC):
     base_obs_history: dict[str, list[np.ndarray]] = {}
     cmd: list[float]
     last_action: np.ndarray
-    _cfg: Sim2Sim_Config
+    _cfg: Sim2SimCfg
 
-    def __init__(self, cfg: Sim2Sim_Config):
+    def __init__(self, cfg: Sim2SimCfg):
         self._cfg = cfg
         self.xml_path = cfg.xml_path
         self.mj_model = mujoco.MjModel.from_xml_path(self.xml_path)
@@ -159,7 +159,7 @@ class Sim2Sim(ABC):
 
 class Sim2SimBaseModel(Sim2Sim):
     
-    def __init__(self, cfg: Sim2Sim_Config):
+    def __init__(self, cfg: Sim2SimCfg):
         super().__init__(cfg)  # Call parent constructor
         
         # Initialize functions

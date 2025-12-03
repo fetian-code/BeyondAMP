@@ -1,7 +1,7 @@
-from sim2simlib.mimic.config import Sim2SimMimic_Config, MimicObservations_Config, MimicDataset_Config
-from sim2simlib.mimic.sim2sim_mimic import Sim2SimMimic
+from sim2simlib.mimic.config import Sim2SimBeyondMimicCfg, BeyondMimicObservationsCfg, BeyondMimicDatasetCfg
+from sim2simlib.mimic.sim2sim_beyond_mimic import Sim2SimBeyondMimic
 from sim2simlib import MUJOCO_ASSETS
-from sim2simlib.model.config import Sim2Sim_Config, Observations_Config, Actions_Config, Motor_Config
+from sim2simlib.model.config import Sim2SimCfg, ObservationsCfg, ActionsCfg, MotorCfg
 from sim2simlib.model.actuator_motor import DCMotor, PIDMotor
 import numpy as np
 
@@ -11,7 +11,7 @@ dataset_dirs=[
 
 CHECKPOINT_DIR = ""
 
-config = Sim2SimMimic_Config(
+config = Sim2SimBeyondMimicCfg(
     robot_name='g1',
     simulation_dt=0.005,
     slowdown_factor=1.0,
@@ -77,7 +77,7 @@ config = Sim2SimMimic_Config(
                      'right_wrist_pitch_link', 
                      'left_wrist_yaw_link', 
                      'right_wrist_yaw_link'],
-    observation_cfg=MimicObservations_Config(
+    observation_cfg=BeyondMimicObservationsCfg(
         base_observations_terms=['base_lin_vel',
                                  'base_ang_vel', 
                                  'joint_pos', 
@@ -98,7 +98,7 @@ config = Sim2SimMimic_Config(
         base_obs_flatten=False,
         base_obs_his_length=1,
         ),
-    action_cfg=Actions_Config(
+    action_cfg=ActionsCfg(
         action_clip=(-100.0, 100.0),
         scale={
             '.*_hip_yaw_joint': 0.5475464652142303,
@@ -120,7 +120,7 @@ config = Sim2SimMimic_Config(
         }
     ),
     
-    motor_cfg=Motor_Config(
+    motor_cfg=MotorCfg(
         motor_type=PIDMotor,
         effort_limit={
             # "legs"
@@ -201,7 +201,7 @@ config = Sim2SimMimic_Config(
             "right_shoulder_roll_joint": -0.2,
             "right_shoulder_pitch_joint": 0.2,
     },
-    mimic_dataset_cfg=MimicDataset_Config(
+    mimic_dataset_cfg=BeyondMimicDatasetCfg(
         dataset_dirs=dataset_dirs,
         robot_name='g1',
         splits=['walk_subset'],
@@ -244,5 +244,5 @@ config = Sim2SimMimic_Config(
     cmd=None,
 )
 
-mujoco_model = Sim2SimMimic(config)
+mujoco_model = Sim2SimBeyondMimic(config)
 mujoco_model.view_run(11)

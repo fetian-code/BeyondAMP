@@ -7,9 +7,9 @@ reinforcement learning environments.
 from collections.abc import Sequence
 import torch
 
-from sim2simlib.utils.motion_dataset import Motion_Dataset
+from sim2simlib.utils.motion_dataset import MotionDataset
 
-class Motion_Dataloader:
+class MotionDataloader:
     """Dataloader for sampling motion clips with optional weighted sampling.
     
     Uses efficient concatenation + offset indexing for vectorized batch access.
@@ -81,7 +81,7 @@ class Motion_Dataloader:
     
     def __init__(
         self,
-        dataset: Motion_Dataset,
+        dataset: MotionDataset,
         body_indexes: Sequence[int],
         device: str = "cuda"
     ):
@@ -266,7 +266,7 @@ if __name__ == "__main__":
     
     # Create dataset
     print("Creating dataset...")
-    dataset = Motion_Dataset(
+    dataset = MotionDataset(
         dataset_dirs=args.dataset_dirs,
         robot_name=args.robot_name,
         split="train",
@@ -274,7 +274,7 @@ if __name__ == "__main__":
     
     # Create dataloader
     print("\nCreating dataloader...")
-    dataloader = Motion_Dataloader(
+    dataloader = MotionDataloader(
         dataset=dataset,
         device=args.device,
     )

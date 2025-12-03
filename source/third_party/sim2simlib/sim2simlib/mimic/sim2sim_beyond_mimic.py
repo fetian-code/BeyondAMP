@@ -9,16 +9,16 @@ import numpy as np
 import rich
 import torch
 
-from sim2simlib.mimic.config import Sim2SimMimic_Config
+from sim2simlib.mimic.config import Sim2SimBeyondMimicCfg
 from sim2simlib.model.actuator_motor import DCMotor, PIDMotor
 from sim2simlib.model.config import Actions
 from sim2simlib.model.sim2sim_base import Sim2SimBaseModel
-from sim2simlib.utils.motion_dataloader import Motion_Dataloader
-from sim2simlib.utils.motion_dataset import Motion_Dataset
+from sim2simlib.utils.motion_dataloader import MotionDataloader
+from sim2simlib.utils.motion_dataset import MotionDataset
 from sim2simlib.utils.math import subtract_frame_transforms, matrix_from_quat
 
 
-class Sim2SimMimic(Sim2SimBaseModel):
+class Sim2SimBeyondMimic(Sim2SimBaseModel):
     """
     Motion tracking/mimic implementation for MuJoCo.
     
@@ -38,10 +38,10 @@ class Sim2SimMimic(Sim2SimBaseModel):
         >>> mimic = Sim2SimMimic(cfg=config)
         >>> mimic.view_run()  # Run with viewer
     """
-    _cfg: Sim2SimMimic_Config
+    _cfg: Sim2SimBeyondMimicCfg
     
     
-    def __init__(self, cfg: Sim2SimMimic_Config):
+    def __init__(self, cfg: Sim2SimBeyondMimicCfg):
         # Initialize parent class (Sim2SimBaseModel)
         # This handles: MuJoCo setup, joint names, motor, default pose
         super().__init__(cfg)
@@ -76,7 +76,7 @@ class Sim2SimMimic(Sim2SimBaseModel):
 
         # Load motion dataset
         rich.print(f"[Sim2SimMimic] Loading motion dataset...")
-        self.dataset = Motion_Dataset(
+        self.dataset = MotionDataset(
             dataset_dirs=self._cfg.mimic_dataset_cfg.dataset_dirs,
             robot_name=self._cfg.mimic_dataset_cfg.robot_name,
             splits=self._cfg.mimic_dataset_cfg.splits
@@ -84,7 +84,7 @@ class Sim2SimMimic(Sim2SimBaseModel):
         
         # Create motion dataloader
         rich.print(f"[Sim2SimMimic] Creating motion dataloader...")
-        self.dataloader = Motion_Dataloader(
+        self.dataloader = MotionDataloader(
             dataset=self.dataset,
             body_indexes=self.lab_body_indexes,
             device=self._cfg.mimic_dataset_cfg.device

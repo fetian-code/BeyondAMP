@@ -2,7 +2,7 @@ import rich
 import re
 import numpy as np
 
-from sim2simlib.model.config import Actions, Motor_Config
+from sim2simlib.model.config import Actions, MotorCfg
 
 
 class PIDMotor:
@@ -37,7 +37,7 @@ class PIDMotor:
     _stiffness: np.ndarray
     _damping: np.ndarray
 
-    def __init__(self, cfg: Motor_Config):
+    def __init__(self, cfg: MotorCfg):
         """
         Initialize the PID motor with configuration parameters.
         
@@ -209,7 +209,7 @@ class DCMotor(PIDMotor):
     _velocity_limit: float | np.ndarray
     _friction: float | np.ndarray
 
-    def __init__(self, cfg: Motor_Config):
+    def __init__(self, cfg: MotorCfg):
         """
         Initialize the DC motor with configuration parameters.
         
