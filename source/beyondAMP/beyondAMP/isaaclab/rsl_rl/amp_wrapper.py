@@ -41,9 +41,9 @@ class AMPEnvWrapper(RslRlVecEnvWrapper):
         # compute dones for compatibility with RSL-RL
         dones = (terminated | truncated).to(dtype=torch.long)
         # move extra observations to the extras dict
-        obs = obs_dict["policy"]
-        privileged_obs = obs_dict.get("critic", obs)
-        terminal_amp_states = obs_dict.get("amp", obs)
+        obs = obs_dict["policy"].clamp(-500, 500)
+        privileged_obs = obs_dict.get("critic", obs).clamp(-500, 500)
+        terminal_amp_states = obs_dict.get("amp", obs).clamp(-500, 500)
         extras["observations"] = obs_dict
         reset_env_ids = torch.where(dones)[0]
         # extras["terminated"] = terminated

@@ -29,4 +29,11 @@ class AMPObsBaiscCfg(AMPObsBaseCfg):
     
 AMPObsBaiscTerms = ["joint_pos", "joint_vel"]
 
-
+@configclass
+class AMPObsClassicCfg(AMPObsBaseCfg):
+    joint_pos = ObsTerm(func=mdp.joint_pos_rel)
+    joint_vel = ObsTerm(func=mdp.joint_vel_rel)
+    base_lin_vel = ObsTerm(func=mdp.base_lin_vel)
+    base_ang_vel = ObsTerm(func=mdp.base_ang_vel)
+    
+AMPObsClassicTerms = ["joint_pos", "joint_vel", "base_lin_vel", "base_ang_vel"]

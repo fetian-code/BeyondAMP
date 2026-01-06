@@ -30,3 +30,4 @@
 
 from .ppo import PPO
 from .amp_ppo import AMPPPO, AMPPPOWeighted
+# from .bmp_ppo import BMPPPO

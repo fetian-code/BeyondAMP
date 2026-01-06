@@ -19,7 +19,7 @@ from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
 from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
 
 from robotlib.beyondMimic.robots.g1 import G1_CYLINDER_CFG
-from ... import mdp
+from . import mdp
 
 COBBLESTONE_ROAD_CFG = terrain_gen.TerrainGeneratorCfg(
     size=(8.0, 8.0),
@@ -343,7 +343,7 @@ class CurriculumCfg:
 
 
 @configclass
-class RobotEnvCfg(ManagerBasedRLEnvCfg):
+class UnitreeVelocityEnvCfg(ManagerBasedRLEnvCfg):
     """Configuration for the locomotion velocity-tracking environment."""
 
     # Scene settings
@@ -385,7 +385,7 @@ class RobotEnvCfg(ManagerBasedRLEnvCfg):
 
 
 @configclass
-class RobotPlayEnvCfg(RobotEnvCfg):
+class RobotPlayEnvCfg(UnitreeVelocityEnvCfg):
     def __post_init__(self):
         super().__post_init__()
         self.scene.num_envs = 32

@@ -84,4 +84,4 @@ class G1FlatAMPHardTrackCfg(G1FlatAMPRunnerCfg):
         super().__post_init__()
         self.amp_data.amp_obs_terms = AMPObsHardTrackTerms
         self.run_name = "amp_hard"
-        self.amp_data.motion_files = [amp_task_demo_data_cfg.soccer_shoot_file]
+        self.amp_data.motion_files = [amp_task_demo_data_cfg.file_soccer_shoot]

@@ -185,6 +185,30 @@ class MotionDataset:
     def anchor_ang_vel_w(self):
         return self.body_ang_vel_w_all[:, self.anchor_index].reshape(self.total_dataset_size, -1)
         
+    @property
+    def base_lin_vel(self):
+        """
+        Base (anchor) linear velocity expressed in base frame.
+        Shape: (N, 3)
+        """
+        v_w = self.anchor_lin_vel_w                       # (N, 3)
+        q_w = self.anchor_quat_w                          # (N, 4)
+
+        v_b = quat_apply_inverse(q_w, v_w)                # world → base
+        return v_b
+
+    @property
+    def base_ang_vel(self):
+        """
+        Base (anchor) angular velocity expressed in base frame.
+        Shape: (N, 3)
+        """
+        w_w = self.anchor_ang_vel_w                       # (N, 3)
+        q_w = self.anchor_quat_w                          # (N, 4)
+
+        w_b = quat_apply_inverse(q_w, w_w)                # world → base
+        return w_b
+
 
     # ----------------------- Transition index builder -----------------------
 

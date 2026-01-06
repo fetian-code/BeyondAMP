@@ -2,7 +2,7 @@ from isaaclab.utils import configclass
 
 from robotlib.beyondMimic.robots.g1 import G1_ACTION_SCALE, G1_CYLINDER_CFG
 from ...tracking_env_cfg import TrackingEnvCfg
-from amp_tasks.amp_task_demo_data_cfg import soccer_shoot_file, demo_punch_file
+from amp_tasks.amp_task_demo_data_cfg import file_soccer_shoot, file_punch
 
 @configclass
 class G1FlatEnvCfg(TrackingEnvCfg):
@@ -30,7 +30,7 @@ class G1FlatEnvCfg(TrackingEnvCfg):
         ]
         # self.observations.policy.projected_gravity = None
         self.commands.motion.debug_vis = False
-        self.commands.motion.motion_file = demo_punch_file
+        self.commands.motion.motion_file = file_punch
 
 @configclass
 class G1FlatNoRelaEnvCfg(G1FlatEnvCfg):
