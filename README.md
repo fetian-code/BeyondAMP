@@ -1,13 +1,13 @@
-# beyondAMP: One-Step Integration of AMP into IsaacLab
+# BeyondAMP: One-Step Integration of AMP into IsaacLab
 
 ## Overview
 
-**beyondAMP** provides a unified pipeline to integrate Adversarial Motion Priors (AMP) into any IsaacLab robot setup, with minimal modifications and full compatibility with custom robot designs. [中文README](./README_cn.md)
+**BeyondAMP** provides a unified pipeline to integrate Adversarial Motion Priors (AMP) into any IsaacLab robot setup, with minimal modifications and full compatibility with custom robot designs. [中文README](./README_cn.md)
 
 ## 🚀 Fast Setup
 
 ```bash
-cd beyondAMP
+cd BeyondAMP
 bash scripts/setup_ext.sh
 # Downloads assets, robot configs, and installs dependencies
 ```
@@ -27,9 +27,9 @@ python scripts/setup_vscode.py
 
 Training can be launched with:
 ```bash
-python scripts/factoryIsaac/train.py --task beyondAMP-DemoPunch-G1-BasicAMP --headless
-# python scripts/factoryIsaac/train.py --task beyondAMP-DemoPunch-G1-SoftAMPTrack --headless
-# python scripts/factoryIsaac/train.py --task beyondAMP-DemoPunch-G1-HardAMPTrack --headless
+python scripts/factoryIsaac/train.py --task BeyondAMP-DemoPunch-G1-BasicAMP --headless
+# python scripts/factoryIsaac/train.py --task BeyondAMP-DemoPunch-G1-SoftAMPTrack --headless
+# python scripts/factoryIsaac/train.py --task BeyondAMP-DemoPunch-G1-HardAMPTrack --headless
 ```
 
 To evaluate or visualize a trained checkpoint:
@@ -60,7 +60,7 @@ With these tools, the dataset organization naturally aligns with the conventions
 
 * AMP observation group added via a new `amp` observation config
 * RSL-RL integration: `source/rsl_rl/rsl_rl/env/isaaclab/amp_wrapper.py`
-* Default transition builder: `source/beyondAMP/beyondAMP/amp_obs.py`
+* Default transition builder: `source/BeyondAMP/BeyondAMP/amp_obs.py`
 
 > For full tutorial and customization, see `docs/tutorial.md`.
 
@@ -91,10 +91,10 @@ With these tools, the dataset organization naturally aligns with the conventions
 ## 📘 Citation
 
 ```bibtex
-@software{zheng2025@beyondAMP,
+@software{zheng2025@BeyondAMP,
   author = {Ziang Zheng},
-  title = {beyondAMP: One step unify IsaacLab with AMP.},
-  url = {https://github.com/Renforce-Dynamics/beyondAMP},
+  title = {BeyondAMP: One step unify IsaacLab with AMP.},
+  url = {https://github.com/Renforce-Dynamics/BeyondAMP},
   year = {2025}
 }
 ```
